@@ -1,0 +1,11 @@
+.post__container {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.post__data {
+    font-size: 14px;
+    color: grey;
+}
