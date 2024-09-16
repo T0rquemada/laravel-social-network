@@ -16,6 +16,7 @@
             <div class="about__user__container">
                 <h2 class="user__name">{{$user['name']}} profile</h2>
                 <h4 class="user__created">Signed up at: {{substr($user['created_at'], 0, 10)}}</h4>
+                @auth
                 @if (Auth::id() !== $user['id'])
                     <form action="/addToBlacklist/{{$user['id']}}" method="POST">
                         @csrf
@@ -40,7 +41,9 @@
                         <button>Blocked users</button>
                     </form>
                 @endif
+                @endauth
             </div>
+            
             
             <h2>{{$user['name']}}'s posts:</h2>
             @include('components/posts_list')
