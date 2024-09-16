@@ -11,7 +11,11 @@
         @auth
             @include('components/header')
             <main>
-                @include('components/posts_list')
+                @if(!empty($posts))
+                    @include('components/posts_list')
+                @else
+                <p>You don't have any subscriptions!</p>
+                @endif
             </main>
         @else
             <p>You should be signed!</p>

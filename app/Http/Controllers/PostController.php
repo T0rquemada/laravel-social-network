@@ -87,16 +87,20 @@ class PostController extends Controller {
                                        ->pluck('user_id')
                                        ->toArray();
 
-        # Fetch all posts users, on which current user subscribed
-        $posts = $this->fetchPostsFromSubscribed($subscribed_on);
+        $posts = [];
 
-        $posts = collect($posts);
+        if (!empty($subscribed_on)) {
+            # Fetch all posts users, on which current user subscribed
+            $posts = $this->fetchPostsFromSubscribed($subscribed_on);
 
-        # Add to every posts 'author' field
-        $posts->transform(function ($post) {
-            $post['author'] = $post['user']['name'];
-            return $post;
-        });
+            $posts = collect($posts);
+
+            # Add to every posts 'author' field
+            $posts->transform(function ($post) {
+                $post['author'] = $post['user']['name'];
+                return $post;
+            });
+        }
 
         return view('subscribes-posts', ['posts' => $posts, 'username' => $current_user_name]);
     }
