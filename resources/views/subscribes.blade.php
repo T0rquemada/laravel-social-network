@@ -5,6 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Subscribes</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
+    <style>
+        .card {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            display: flex; 
+            justify-content: space-between; 
+            width: 30%; 
+            
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        
+    </style>
 </head>
 <body>
     @php
@@ -21,10 +34,8 @@
                 $user = User::where('id', $user['user_id'])->get()[0];
             @endphp
 
-            <div>{{$user}}</div>
-            <div>
+            <div class="card">
                 <a href="/user/{{$user['id']}}">{{$user['name']}}</a>
-                <div>{{$user['id']}}</div>
                 <form action="/unsubscribe/{{$user['id']}}" method="POST">
                     @csrf
                     @method('DELETE')
