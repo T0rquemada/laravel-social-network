@@ -6,6 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Blacklist</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
+    <style>
+        .card {
+            margin: 0.5rem;
+            padding: 0.5rem;
+            display: flex; 
+            justify-content: space-between; 
+            width: 30%; 
+            
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     @php
@@ -20,8 +32,8 @@
             @php
                 $blocked_user = User::where('id', $user['blocked_id'])->get();
             @endphp
-            <div><a href="/user/{{$blocked_user[0]['id']}}">{{$blocked_user[0]['name']}}</a></div>
-            <form action="/unblock-user/{{$blocked_user[0]['id']}}" method="POST">
+                <form class="card" action="/unblock-user/{{$blocked_user[0]['id']}}" method="POST">
+                <a href="/user/{{$blocked_user[0]['id']}}">{{$blocked_user[0]['name']}}</a>
                 @csrf
                 @method('DELETE')
                 <button>Unblock user</button>
