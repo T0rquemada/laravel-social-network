@@ -3,7 +3,9 @@
 This project developed on Laravel.
 
 ## Prerequisites
+*Make sure, you have installed*
 - [Composer](https://getcomposer.org/)
+- [PHP](https://www.php.net/)
 
 ## Functionality
 1. You can sign in / up
