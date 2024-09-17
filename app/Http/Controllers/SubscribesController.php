@@ -43,19 +43,21 @@ class SubscribesController extends Controller {
         return redirect("/subscribed/$current_user_id");
     }
 
+    // Return users, which subscribed on current user 
     public function getSubscribes () {
-        $subscribers = ['users' => Subscribes::where('user_id', Auth::id())->get()];
+        $subscribers = Subscribes::where('user_id', Auth::id())
+                            ->with('user') // Load user relation
+                            ->get();
     
-        if (!empty($subscribers)) return view('subscribes', $subscribers);
-        $id = Auth::id();
-        return redirect("/user/$id");
+        return view('subscribes', ['subscribers' => $subscribers]);
     }
 
+    // Return users, on which current user subscribed
     public function getSubscribed() {
-        $subscribed = ['users' => Subscribes::where('subscribed_id', Auth::id())->get()];
+        $subscribed = Subscribes::where('subscribed_id', Auth::id())
+                            ->with('user')
+                            ->get();
     
-        if (!empty($subscribed)) return view('subscribes', $subscribed);
-        $id = Auth::id();
-        return redirect("/user/$id");
+        return view('subscribed', ['subscribed' => $subscribed]);
     }
 }

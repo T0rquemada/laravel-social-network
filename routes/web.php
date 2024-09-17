@@ -38,8 +38,8 @@ Route::get('/blocked-users/{id}', [BlacklistController::class, 'getBlockedUsers'
 # User's subscribes
 Route::post('/subscribe/{id}', [SubscribesController::class, 'subscribe']);
 Route::delete('/unsubscribe/{id}', [SubscribesController::class, 'unsubscribe']);
-Route::get('/subscribers', [SubscribesController::class, 'getSubscribes'])->name('subscribes.view');
-Route::get('/subscribed/{id}', [SubscribesController::class, 'getSubscribed'])->name('subscribes.view');
+Route::get('/subscribers/{id}', [SubscribesController::class, 'getSubscribes'])->name('subscribes.view');
+Route::get('/subscribed/{id}', [SubscribesController::class, 'getSubscribed'])->name('subscribed.view');
 
 # Posts
 Route::post('/create-post', [PostController::class, 'createPost']);

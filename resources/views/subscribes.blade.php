@@ -16,7 +16,6 @@
             border: 1px solid #000;
             border-radius: 5px;
         }
-        
     </style>
 </head>
 <body>
@@ -29,21 +28,15 @@
             @include('components/header')
         @endauth
 
-        @foreach ($users as $user)
-            @php
-                $user = User::where('id', $user['user_id'])->get()[0];
-            @endphp
-
-            <div class="card">
-                <a href="/user/{{$user['id']}}">{{$user['name']}}</a>
-                <form action="/unsubscribe/{{$user['id']}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button>Unsubscribe</button>
-                </form>
-            </div>
-            
-        @endforeach
+        @if($subscribers->isEmpty())
+            <p>You don't subscribed on any user!</p>
+        @else
+            @foreach ($subscribers as $subscriber)
+                <div class="card">
+                    <a href="/user/{{$subscriber->user->id}}">{{$subscriber->user->name}}</a>
+                </div>
+            @endforeach
+        @endif
     </div>
 </body>
 </html>

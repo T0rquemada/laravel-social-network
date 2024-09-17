@@ -9,4 +9,8 @@ class Subscribes extends Model {
     use HasFactory;
     protected $fillable = ['user_id', 'subscribed_id'];
     public $timestamps = false; # Disable timestamps
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
